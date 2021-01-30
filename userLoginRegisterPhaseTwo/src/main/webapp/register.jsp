@@ -6,10 +6,15 @@
 <meta charset="ISO-8859-1">
 <title>Employee Registration</title>
 </head>
-
-</head>
 <body>
 	<form action="<%=request.getContextPath()%>/register" method="post">
+		<%
+		if (request.getAttribute("message") != null) {
+		%>
+		<h2><%=request.getAttribute("message")%></h2>
+		<%
+		}
+		%>
 		<table>
 			<tr>
 				<td>First Name:</td>
@@ -44,22 +49,9 @@
 			<tr>
 				<td>&nbsp;</td>
 				<td><button type="submit" class="btn btn-primary"
-						value='Register' name="submitButton">Submit</button></td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td><button type="submit" class="btn btn-primary"
-						value='Member' name="memberButton">Already a Member?</button></td>
+						value='Register' name="submitButton">Register</button></td>
 			</tr>
 		</table>
-		<%
-		if (request.getAttribute("message") != null) {
-		%>
-		<h2><%=request.getAttribute("message")%></h2>
-		<%
-		}
-		%>
 	</form>
-
 </body>
 </html>

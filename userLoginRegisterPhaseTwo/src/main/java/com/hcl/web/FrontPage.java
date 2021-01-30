@@ -24,7 +24,6 @@ public class FrontPage extends HttpServlet {
 	 */
 	public FrontPage() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public void init() {
@@ -32,29 +31,19 @@ public class FrontPage extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.sendRedirect("index.jsp");
+		//If user clicks register, go to register page
+		if ("Register".equals(request.getParameter("registerButton"))) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			//If user clicks login, go to login page
+			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
-
-//	/**
-//	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-//	 */
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		if ("registerButton".equals(request.getParameter("registerButton"))) {
-//			RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
-//			dispatcher.forward(request, response);
-//		} else if("loginButton".equals(request.getParameter("loginButton"))){
-//			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-//			dispatcher.forward(request, response);
-//		}else {
-//			
-//		}
-//	}
-
 }

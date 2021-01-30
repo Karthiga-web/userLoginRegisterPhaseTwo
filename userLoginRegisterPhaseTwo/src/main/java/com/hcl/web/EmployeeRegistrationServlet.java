@@ -17,20 +17,9 @@ public class EmployeeRegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private EmployeeDao employeeDao;
 
-	public void init() {
-		employeeDao = new EmployeeDao();
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if ("Register".equals(request.getParameter("submitButton"))) {
-			register(request, response);
-		} else if ("Member".equals(request.getParameter("memberButton"))) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-			dispatcher.forward(request, response);
-		} else {
-
-		}
+		register(request, response);
 	}
 
 	private void register(HttpServletRequest request, HttpServletResponse response)
@@ -39,6 +28,7 @@ public class EmployeeRegistrationServlet extends HttpServlet {
 		Employee ifEmployeeExists = employeeDao.findIfEmployeeExists(request.getParameter("username"));
 		if (ifEmployeeExists == null) {
 			System.out.println("Saved");
+			//get all values entered by the user
 			String firstName = request.getParameter("firstName");
 			String lastName = request.getParameter("lastName");
 			String username = request.getParameter("username");
@@ -46,6 +36,7 @@ public class EmployeeRegistrationServlet extends HttpServlet {
 			String email = request.getParameter("email");
 			String contactNumber = request.getParameter("contactNumber");
 			Employee employee = new Employee();
+			//store the values in employee
 			employee.setFirstName(firstName);
 			employee.setLastName(lastName);
 			employee.setUsername(username);
@@ -58,15 +49,22 @@ public class EmployeeRegistrationServlet extends HttpServlet {
 			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
 				message = "Enter correct values in the fields!";
+				//sending message to user
 				request.setAttribute("message", message);
 				dispatcher.forward(request, response);
 			}
 		} else {
 			System.out.println("Same User");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+			//sending message to user
 			message = "Please use different Username!";
 			request.setAttribute("message", message);
 			dispatcher.forward(request, response);
 		}
+	}
+
+	public EmployeeRegistrationServlet() {
+		super();
+		employeeDao = new EmployeeDao();
 	}
 }

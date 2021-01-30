@@ -27,8 +27,10 @@ public class EmployeeLoginServlet extends HttpServlet {
 		try {
 			authenticate(request, response);
 		} catch (Exception e) {
+			//If unexpected error occured, ask to login again
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 			message = "Unexpected Error Occured! Try again!";
+			//sending message to user
 			request.setAttribute("message", message);
 			dispatcher.forward(request, response);
 		}
@@ -40,25 +42,32 @@ public class EmployeeLoginServlet extends HttpServlet {
 		String message = null;
 		String check = loginDao.validate(username, password);
 		if (check.equals("Pass")) {
+			//If user exist, Successfull login 
 			System.out.println("LoginSuccess");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("SuccessLogin.jsp");
 			dispatcher.forward(request, response);
-		} else if(check.equals("Exists")) {
+		} else if (check.equals("Exists")) {
+			//If user exist but gave wrong password, ask again to give correct password
 			System.out.println("Exists");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 			message = "Wrong Password! Try Again!";
+			//sending message to user
 			request.setAttribute("message", message);
 			dispatcher.forward(request, response);
-		} else if(check.equals("NotExists")) {
+		} else if (check.equals("NotExists")) {
+			//If user doesn't exist, ask to register
 			System.out.println("NotExists");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
 			message = "Are you a New Employee? Please Register!";
+			//sending message to user
 			request.setAttribute("message", message);
 			dispatcher.forward(request, response);
-		}else {
+		} else {
+			//If unexpected error occured, ask to login again
 			System.out.println("Unexpected");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 			message = "Unexpected Error Occured! Try again!";
+			//sending message to user
 			request.setAttribute("message", message);
 			dispatcher.forward(request, response);
 		}

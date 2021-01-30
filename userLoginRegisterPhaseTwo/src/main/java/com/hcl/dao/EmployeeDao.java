@@ -13,6 +13,7 @@ public class EmployeeDao {
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			transaction = session.beginTransaction();
 			session.save(employee);
+			//hibernate insert query to save user details in DB
 			transaction.commit();
 			return true;
 		} catch (Exception e) {
@@ -26,14 +27,18 @@ public class EmployeeDao {
 		Employee user = null;
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			transaction = session.beginTransaction();
+			//To find if employee exists in DB
 			user = findIfEmployeeExists(username);
+			//If user exist, go to login page
 			if (user != null) {
 				if (user.getPassword().equals(password)) {
 					return "Pass";
 				} else {
+					//If user exist but gave wrong password, ask again to give correct password
 					return "Exists";
 				}
 			} else {
+				//If user doesn't exist, ask to register
 				return "NotExists";
 			}
 		} catch (Exception e) {
@@ -41,12 +46,13 @@ public class EmployeeDao {
 		}
 		return "TryAgain";
 	}
-
+//To find if employee exists in DB
 	public Employee findIfEmployeeExists(String username) {
 		Transaction transaction = null;
 		Employee employee = null;
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			transaction = session.beginTransaction();
+			//hibernate select query to find if user exists in DB
 			employee = (Employee) session.createQuery("FROM Employee U WHERE U.username = :username")
 					.setParameter("username", username).uniqueResult();
 		} catch (Exception e) {

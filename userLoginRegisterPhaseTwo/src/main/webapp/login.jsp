@@ -8,6 +8,13 @@
 </head>
 <body>
 	<form action="<%=request.getContextPath()%>/login" method="post">
+		<%
+		if (request.getAttribute("message") != null) {
+		%>
+		<h2><%=request.getAttribute("message")%></h2>
+		<%
+		}
+		%>
 		<table>
 			<tr>
 				<td>User Name:</td>
@@ -21,16 +28,9 @@
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-				<td><button type="submit" class="btn btn-primary">Submit</button></td>
+				<td><button type="submit" class="btn btn-primary">Login</button></td>
 			</tr>
 		</table>
-		<%
-		if (request.getAttribute("message") != null) {
-		%>
-		<h2><%=request.getAttribute("message")%></h2>
-		<%
-		}
-		%>
 	</form>
 </body>
 </html>
