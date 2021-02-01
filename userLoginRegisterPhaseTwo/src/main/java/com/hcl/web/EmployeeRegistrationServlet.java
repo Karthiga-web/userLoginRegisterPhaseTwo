@@ -9,11 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.hcl.dao.EmployeeDao;
 import com.hcl.model.Employee;
 
 @WebServlet("/register")
 public class EmployeeRegistrationServlet extends HttpServlet {
+	static Logger log = Logger.getLogger(EmployeeDao.class.getName());
 	private static final long serialVersionUID = 1L;
 	private EmployeeDao employeeDao;
 
@@ -51,6 +54,7 @@ public class EmployeeRegistrationServlet extends HttpServlet {
 				message = "Enter correct values in the fields!";
 				//sending message to user
 				request.setAttribute("message", message);
+				log.info(message);
 				dispatcher.forward(request, response);
 			}
 		} else {
@@ -59,6 +63,7 @@ public class EmployeeRegistrationServlet extends HttpServlet {
 			//sending message to user
 			message = "Please use different Username!";
 			request.setAttribute("message", message);
+			log.info(message);
 			dispatcher.forward(request, response);
 		}
 	}

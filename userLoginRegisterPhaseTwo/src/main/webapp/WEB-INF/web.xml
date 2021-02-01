@@ -5,13 +5,13 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
-  	<servlet-name>FrontPage</servlet-name>
-  	<display-name>FrontPage</display-name>
+  	<servlet-name>FrontPageServlet</servlet-name>
+  	<display-name>FrontPageServlet</display-name>
   	<description></description>
-  	<servlet-class>com.hcl.web.FrontPage</servlet-class>
+  	<servlet-class>com.hcl.web.FrontPageServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>FrontPage</servlet-name>
-  	<url-pattern>/FrontPage</url-pattern>
+  	<servlet-name>FrontPageServlet</servlet-name>
+  	<url-pattern>/FrontPageServlet</url-pattern>
   </servlet-mapping>
 </web-app>

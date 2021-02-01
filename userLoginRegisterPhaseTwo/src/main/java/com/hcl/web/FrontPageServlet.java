@@ -15,14 +15,14 @@ import com.hcl.dao.EmployeeDao;
  * Servlet implementation class FrontPage
  */
 @WebServlet("/index")
-public class FrontPage extends HttpServlet {
+public class FrontPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private EmployeeDao employeeDao;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public FrontPage() {
+	public FrontPageServlet() {
 		super();
 	}
 
